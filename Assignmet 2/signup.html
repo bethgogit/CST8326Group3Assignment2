@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unknown Pizza</title>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+          <nav>
+            <h1>Unknown Pizza</h1>
+        </nav>
+        <main class="signUp">
+        <form action="process.php" method="post">
+            <fieldset class="name">
+                <label for="firstName"> First Name</label>
+                <label for="lastName"> Last Name</label>
+                <input
+                type="text"
+                id="firstName"
+                required
+                placeholder="First Name"
+                >
+                <input
+                type="text"
+                id="lastName"
+                required
+                placeholder="Last Name"
+                >
+            </fieldset>
+            <fieldset id="email">
+                <label for="email"> Email</label>
+                <input
+                type="email"
+                id="email"
+                required
+                placeholder="Email Address"
+                >
+            </fieldset>
+            <fieldset id="pass">
+                <label for="pass"> Password</label>
+                <input
+                type="password"
+                id="pass"
+                required
+                >
+            </fieldset>
+            <fieldset id="pass2">
+                <label for="rePass"> Re-enter Password</label>
+                <input
+                type="password"
+                id="rePass"
+                required
+                >
+            </fieldset>
+            <input class="button" type="reset">
+            <input class="button" type="submit" value="Sign Up">
+        </form>
+        </main>
+    </body>
+</html>
