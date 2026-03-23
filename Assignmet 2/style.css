@@ -18,17 +18,46 @@ form{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, auto);
+    gap: 10px;
 }
 fieldset{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(8, 20px);
     gap: 10px;
     border: 0;
 }
 
 .name{
+    grid-column: span 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 20px 20px;
     gap: 10px;
+}
+#email{
+    grid-column: span 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 20px 20px;
+}
+#pass{
+    grid-column: span 2;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 20px 20px;
+}
+#pass2{
+    grid-column: span 2;
+    grid-row: 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 20px 20px;
+}
+.button{
+    grid-column: span 1;
+    grid-row: 5;
+    background-color: aquamarine;
 }
 .name label{
     grid-column: span 1;
@@ -37,36 +66,29 @@ fieldset{
 .name input{
     grid-column: span 1;
     grid-row: 2;
-    width: 100%;
 }
 #email label{
     grid-column: span 1;
-    grid-row: 3;
+    grid-row: 1;
 }
 #email input{
     grid-column: span 2;
-    grid-row: 4;
+    grid-row: 2;
 }
 #pass label{
     grid-column: span 1;
-    grid-row: 5;
+    grid-row: 1;
 }
 #pass input{
     grid-column: span 2;
-    grid-row: 6;
+    grid-row: 2;
 }
 #pass2 label{
     grid-column: span 1;
-    grid-row: 7;
+    grid-row: 1;
 }
 #pass2 input{
     grid-column: span 2;
-    grid-row: 8;
+    grid-row: 2;
 }
-.button{
-    grid-column: span 1;
-    grid-row: 9;
-    gap: 10px;
-    width: 100%;
-    background-color: aquamarine;
-}
+
