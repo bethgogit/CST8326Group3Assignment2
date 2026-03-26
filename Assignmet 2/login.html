@@ -9,8 +9,9 @@
         <nav>
             <h1>Unknown Pizza</h1>
         </nav>
-        <form>
-            <fieldset>
+        <main class="login">
+        <form action="process.php" method="post">
+            <fieldset id="email">
                 <label for="email"> Email</label>
                 <input
                 type="email"
@@ -19,7 +20,7 @@
                 placeholder="Email Address"
                 >
             </fieldset>
-            <fieldset>
+            <fieldset id="pass">
                 <label for="pass"> Password</label>
                 <input
                 type="password"
@@ -27,7 +28,12 @@
                 required
                 >
             </fieldset>
-            <input for="submit" value="LOGIN">
+            <input class="button" type="submit" value="LOGIN">
+			<input class="button" type="submit" formaction="signup.html" formnovalidate value="SIGN UP">
         </form>
+        </main>
+        <footer>
+            <p>&copy;known pizza</p>
+        </footer>
     </body>
 </html>
