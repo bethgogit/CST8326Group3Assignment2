@@ -15,47 +15,54 @@
         </nav>
         <main>
             <h2>Add/Modify Item</h2>
+            <!-- TODO: Define method (post likely) and action for form -->
             <form id="modify-item-form">
                 <div>
-                    <div id="modify-item-imagediv">
+                    <div id="modify-item-imagediv" class="make-things-vertical-please">
+                        <h3>Item Image:</h3>
                         <img alt="image to display item as" src="">
                         <label for="modify-item-image-dropdown">Use predefined image:</label>
                         <select id="modify-item-image-dropdown">
-                            <option name="blank" checked></option>
+                            <option name="blank"></option>
                             <option name="opt1">Hawk</option>
                             <option name="opt2">Tuah</option>
                         </select>
                         <label for="modify-item-image-url">Use image URL:</label>
                         <input id="modify-item-image-url">
                     </div>
-                    <div id="modify-item-description">
+                    <div id="modify-item-info" class="make-things-vertical-please">
+                        <h3>Item Info:</h3>
                         <label for="modify-item-name">Item name:</label>
                         <input id="modify-item-name">
                         <label for="modify-item-description">Item description:</label>
                         <textarea id="modify-item-description"></textarea>
                     </div>
                     <div id="modify-item-options">
-                        <button>Save changes</button>
-                        <button>Cancel changes</button>
-                        <button>Delete item</button>
+                        <input type="submit" id="save" value="Save changes">
+                        <input type="submit" id="cancel" value="Cancel changes">
+                        <input type="submit" id="delete" value="Delete item">
                     </div>
                 </div>
                 <div>
                     <div id="modify-item-propertydiv">
-                        <label for="modify-item-size">Item name:</label>
+                        <h3>Item Properties:</h3>
+                        <label for="modify-item-size">Item size:</label>
                         <select id="modify-item-size">
                             <option name="small">Small</option>
                             <option name="medium">Medium</option>
                             <option name="large">Large</option>
+                            <option name="na">N/A</option>
                         </select>
-                        <label for="modify-item-crust">Item name:</label>
+                        <label for="modify-item-crust">Item crust:</label>
                         <select id="modify-item-crust">
                             <option name="regular">Regular</option>
                             <option name="thin">Thin</option>
                             <option name="stuffed">Stuffed</option>
+                            <option name="na">N/A</option>
                         </select>
                     </div>
-                    <div id="modify-item-toppingsdiv">
+                    <div id="modify-item-toppingsdiv" class="make-things-vertical-please">
+                        <h3>Item Toppings:</h3>
                         <input type="radio" name="modify-item-toppings" id="toppings-top1" value="Cheese">
                         <label for="toppings-top1">Cheese</label>
                         <input type="radio" name="modify-item-toppings" id="toppings-top2" value="Pepperoni">
