@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Unknown Pizza</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
     </head>
     <body>
         <header>
@@ -14,7 +15,7 @@
         </nav>
         <main>
             <h2>Add/Modify Item</h2>
-            <form>
+            <form id="modify-item-form">
                 <div>
                     <div id="modify-item-imagediv">
                         <img alt="image to display item as" src="">
@@ -38,6 +39,8 @@
                         <button>Cancel changes</button>
                         <button>Delete item</button>
                     </div>
+                </div>
+                <div>
                     <div id="modify-item-propertydiv">
                         <label for="modify-item-size">Item name:</label>
                         <select id="modify-item-size">

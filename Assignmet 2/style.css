@@ -13,12 +13,17 @@ body{
 h1{
     text-align: center;
 }
+
+/* 
+TODO: Make a unique class for forms.
 form{
     grid-column: 5 / 10;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, auto);
 }
+*/
+
 fieldset{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -69,4 +74,15 @@ fieldset{
     gap: 10px;
     width: 100%;
     background-color: aquamarine;
+}
+
+
+#modify-item-form {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+#modify-item-form > div > div {
+    background-color: aquamarine;
+    margin: 5px;
 }
