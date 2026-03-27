@@ -27,7 +27,7 @@ footer{
 h1{
     text-align: center;
 }
-form{
+#loginAndSignUp{
     grid-column: 5 / 10;
     display: grid;
     grid-template-columns: 1fr 1fr;
