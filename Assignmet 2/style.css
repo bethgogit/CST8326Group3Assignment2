@@ -15,14 +15,13 @@ h1{
 }
 
 /* 
-TODO: Make a unique class for forms.
+TODO: These should be classes or IDs.
 form{
     grid-column: 5 / 10;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, auto);
 }
-*/
 
 fieldset{
     display: grid;
@@ -31,6 +30,7 @@ fieldset{
     gap: 10px;
     border: 0;
 }
+    */
 
 .name{
     gap: 10px;
@@ -79,10 +79,23 @@ fieldset{
 
 #modify-item-form {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
 }
 
 #modify-item-form > div > div {
     background-color: aquamarine;
     margin: 5px;
+    padding: 5px;
+}
+
+.make-things-vertical-please {
+    display: flex;
+    flex-direction: column;
+}
+
+/*TODO: This may be a little too specific.*/
+.make-things-vertical-please > input, 
+.make-things-vertical-please > textarea, 
+.make-things-vertical-please > select {
+    width: 50%;
 }
