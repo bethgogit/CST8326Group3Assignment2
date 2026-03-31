@@ -1,0 +1,59 @@
+doctype html
+meta(charset='UTF-8')
+meta(name='viewport' content='width=device-width, initial-scale=1.0')
+title Unknown Pizza
+link(rel='stylesheet' href='style.css' type='text/css')
+
+header
+  h1 Unknown Pizza
+nav
+  a#order(href='order.html') ORDER
+main
+  h2 Add/Modify Item
+  // TODO: Define method (post likely) and action for form
+  form#modify-item-form
+    div
+      #modify-item-imagediv.make-things-vertical-please
+        h3 Item Image:
+        img(alt='image to display item as' src='')
+        label(for='modify-item-image-dropdown') Use predefined image:
+        select#modify-item-image-dropdown
+          option(name='blank')
+          option(name='opt1') Hawk
+          option(name='opt2') Tuah
+        label(for='modify-item-image-url') Use image URL:
+        input#modify-item-image-url
+      #modify-item-info.make-things-vertical-please
+        h3 Item Info:
+        label(for='modify-item-name') Item name:
+        input#modify-item-name
+        label(for='modify-item-description') Item description:
+        textarea#modify-item-description
+      #modify-item-options
+        input#save(type='submit' value='Save changes')
+        input#cancel(type='submit' value='Cancel changes')
+        input#delete(type='submit' value='Delete item')
+    div
+      #modify-item-propertydiv
+        h3 Item Properties:
+        label(for='modify-item-size') Item size:
+        select#modify-item-size
+          option(name='small') Small
+          option(name='medium') Medium
+          option(name='large') Large
+          option(name='na') N/A
+        label(for='modify-item-crust') Item crust:
+        select#modify-item-crust
+          option(name='regular') Regular
+          option(name='thin') Thin
+          option(name='stuffed') Stuffed
+          option(name='na') N/A
+      #modify-item-toppingsdiv.make-things-vertical-please
+        h3 Item Toppings:
+        input#toppings-top1(type='radio' name='modify-item-toppings' value='Cheese')
+        label(for='toppings-top1') Cheese
+        input#toppings-top2(type='radio' name='modify-item-toppings' value='Pepperoni')
+        label(for='toppings-top1') Pepperoni
+        input#toppings-top3(type='radio' name='modify-item-toppings' value='Wet Mulch')
+        label(for='toppings-top1') Wet Mulch
+footer
