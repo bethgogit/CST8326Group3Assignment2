@@ -1,12 +1,15 @@
-extends layout.pug
+doctype html
+meta(charset='UTF-8')
+meta(name='viewport' content='width=device-width, initial-scale=1.0')
+title Unknown Pizza
+link(rel='stylesheet' href='style.css' type='text/css')
 
-block navigation-content
+header
+  h1 Unknown Pizza
+nav
   a#order(href='order.html') ORDER
-
-block page-name
-  - let pageName = "Add/Modify Item"
-
-block page-content 
+main
+  h2 Add/Modify Item
   // TODO: Define method (post likely) and action for form
   form#modify-item-form
     div
@@ -53,3 +56,4 @@ block page-content
         label(for='toppings-top1') Pepperoni
         input#toppings-top3(type='radio' name='modify-item-toppings' value='Wet Mulch')
         label(for='toppings-top1') Wet Mulch
+footer
