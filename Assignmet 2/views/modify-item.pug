@@ -47,9 +47,9 @@ block page-content
           option(name='na') N/A
       fieldset#modify-item-toppings.make-things-vertical-please
         h3 Item Toppings:
-        input#toppings-top1(type='radio' name='modify-item-toppings' value='Cheese')
-        label(for='toppings-top1') Cheese
-        input#toppings-top2(type='radio' name='modify-item-toppings' value='Pepperoni')
-        label(for='toppings-top1') Pepperoni
-        input#toppings-top3(type='radio' name='modify-item-toppings' value='Wet Mulch')
-        label(for='toppings-top1') Wet Mulch
+        - const TOPPINGS = ['Cheese', 'Pepperoni', 'Sausage', 'Peppers', 'Pineapple']
+        each topping in TOPPINGS
+          - let toppingLower = topping.toLowerCase()
+          - let itemId = "modify-item-topping-"+toppingLower
+          input(id=itemId type='checkbox' name=toppingLower)
+          label(for=itemId) #{topping}
