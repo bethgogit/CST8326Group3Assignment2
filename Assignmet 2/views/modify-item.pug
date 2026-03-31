@@ -14,7 +14,7 @@ main
   form#modify-item-form
     div
       fieldset#modify-item-image.make-things-vertical-please
-        h3 Item Image:
+        legend Item Image:
         img(alt='image to display item as' src='')
         label(for='modify-item-image-dropdown') Use predefined image:
         select#modify-item-image-dropdown
@@ -24,7 +24,7 @@ main
         label(for='modify-item-image-url') Use image URL:
         input#modify-item-image-url
       fieldset#modify-item-info.make-things-vertical-please
-        h3 Item Info:
+        legend Item Info:
         label(for='modify-item-name') Item name:
         input#modify-item-name
         label(for='modify-item-description') Item description:
@@ -35,7 +35,7 @@ main
         input#delete(type='submit' value='Delete item')
     div
       fieldset#modify-item-properties.make-things-vertical-please
-        h3 Item Properties:
+        legend Item Properties:
         label(for='modify-item-size') Item size:
         select#modify-item-size
           option(name='small') Small
