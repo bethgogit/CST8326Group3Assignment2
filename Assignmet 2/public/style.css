@@ -16,6 +16,7 @@ h1{
 
 /* 
 TODO: These should be classes or IDs.
+
 form{
     grid-column: 5 / 10;
     display: grid;
@@ -68,6 +69,8 @@ fieldset{
     grid-column: span 2;
     grid-row: 8;
 }
+
+/*TODO This is a bad class name.*/
 .button{
     grid-column: span 1;
     grid-row: 9;
@@ -76,13 +79,12 @@ fieldset{
     background-color: aquamarine;
 }
 
-
 #modify-item-form {
     display: grid;
     grid-template-columns: 50% 50%;
 }
 
-#modify-item-form > div > div {
+#modify-item-form>div>fieldset {
     background-color: aquamarine;
     margin: 5px;
     padding: 5px;
