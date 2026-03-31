@@ -13,7 +13,7 @@ main
   // TODO: Define method (post likely) and action for form
   form#modify-item-form
     div
-      #modify-item-imagediv.make-things-vertical-please
+      fieldset#modify-item-image.make-things-vertical-please
         h3 Item Image:
         img(alt='image to display item as' src='')
         label(for='modify-item-image-dropdown') Use predefined image:
@@ -23,18 +23,18 @@ main
           option(name='opt2') Tuah
         label(for='modify-item-image-url') Use image URL:
         input#modify-item-image-url
-      #modify-item-info.make-things-vertical-please
+      fieldset#modify-item-info.make-things-vertical-please
         h3 Item Info:
         label(for='modify-item-name') Item name:
         input#modify-item-name
         label(for='modify-item-description') Item description:
         textarea#modify-item-description
-      #modify-item-options
+      fieldset#modify-item-options
         input#save(type='submit' value='Save changes')
         input#cancel(type='submit' value='Cancel changes')
         input#delete(type='submit' value='Delete item')
     div
-      #modify-item-propertydiv
+      fieldset#modify-item-properties.make-things-vertical-please
         h3 Item Properties:
         label(for='modify-item-size') Item size:
         select#modify-item-size
@@ -48,7 +48,7 @@ main
           option(name='thin') Thin
           option(name='stuffed') Stuffed
           option(name='na') N/A
-      #modify-item-toppingsdiv.make-things-vertical-please
+      fieldset#modify-item-toppings.make-things-vertical-please
         h3 Item Toppings:
         input#toppings-top1(type='radio' name='modify-item-toppings' value='Cheese')
         label(for='toppings-top1') Cheese

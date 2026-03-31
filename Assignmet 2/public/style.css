@@ -17,8 +17,6 @@ h1{
 /* 
 TODO: These should be classes or IDs.
 
-/* 
-TODO: These should be classes or IDs.
 form{
     grid-column: 5 / 10;
     display: grid;
@@ -34,7 +32,6 @@ fieldset{
     gap: 10px;
     border: 0;
 }
-    */
     */
 
 .name{
@@ -73,6 +70,8 @@ fieldset{
     grid-column: span 2;
     grid-row: 8;
 }
+
+/*TODO This is a bad class name.*/
 .button{
     grid-column: span 1;
     grid-row: 9;
@@ -81,36 +80,12 @@ fieldset{
     background-color: aquamarine;
 }
 
-
 #modify-item-form {
     display: grid;
     grid-template-columns: 50% 50%;
 }
 
-#modify-item-form > div > div {
-    background-color: aquamarine;
-    margin: 5px;
-    padding: 5px;
-}
-
-.make-things-vertical-please {
-    display: flex;
-    flex-direction: column;
-}
-
-/*TODO: This may be a little too specific.*/
-.make-things-vertical-please > input, 
-.make-things-vertical-please > textarea, 
-.make-things-vertical-please > select {
-    width: 50%;
-}
-
-#modify-item-form {
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
-
-#modify-item-form > div > div {
+#modify-item-form>div>fieldset {
     background-color: aquamarine;
     margin: 5px;
     padding: 5px;
