@@ -23,7 +23,7 @@ block page-content
         legend Item Image:
         img(alt='image to display item as' src='')
         label(for='modify-item-image-dropdown') Use predefined image:
-        +addDropdown("image", 
+        +addDropdown("image-predefined", 
         [{name: "na", value: ""},
         "image1",
         "image2"])#modify-item-image-dropdown
@@ -31,13 +31,13 @@ block page-content
           option(name='opt1') Hawk
           option(name='opt2') Tuah
         label(for='modify-item-image-url') Use image URL:
-        input#modify-item-image-url
+        input(name="image-URL")#modify-item-image-url
       fieldset#modify-item-info.make-things-vertical-please
         legend Item Info:
         label(for='modify-item-name') Item name:
-        input#modify-item-name
+        input(name="name")#modify-item-name
         label(for='modify-item-description') Item description:
-        textarea#modify-item-description
+        textarea(name="description")#modify-item-description
       fieldset#modify-item-options
         input#save(type='submit' value='Save changes')
         input#cancel(type='submit' value='Cancel changes')
