@@ -1,5 +1,14 @@
 extends layout.pug
 
+mixin addDropdown(name, items)
+  select(name=name)
+    each item in items
+      if (item.name)
+        option(value=item.name) #{item.value}
+      else 
+        - let itemLower = item.toLowerCase()
+        option(value=itemLower) #{item}
+
 block navigation-content
   a#order(href='order.html') ORDER
 
@@ -8,13 +17,16 @@ block page-name
 
 block page-content 
   // TODO: Define method (post likely) and action for form
-  form#modify-item-form
+  form(method="POST" action="/modify")#modify-item-form
     div
       fieldset#modify-item-image.make-things-vertical-please
         legend Item Image:
         img(alt='image to display item as' src='')
         label(for='modify-item-image-dropdown') Use predefined image:
-        select#modify-item-image-dropdown
+        +addDropdown("image", 
+        [{name: "na", value: ""},
+        "image1",
+        "image2"])#modify-item-image-dropdown
           option(name='blank')
           option(name='opt1') Hawk
           option(name='opt2') Tuah
@@ -34,17 +46,17 @@ block page-content
       fieldset#modify-item-properties.make-things-vertical-please
         legend Item Properties:
         label(for='modify-item-size') Item size:
-        select#modify-item-size
-          option(name='small') Small
-          option(name='medium') Medium
-          option(name='large') Large
-          option(name='na') N/A
+        +addDropdown("size", 
+        ['Small',
+        'Medium',
+        'Large',
+        {name: "na", value: "N/A"}])#modify-item-size
         label(for='modify-item-crust') Item crust:
-        select#modify-item-crust
-          option(name='regular') Regular
-          option(name='thin') Thin
-          option(name='stuffed') Stuffed
-          option(name='na') N/A
+        +addDropdown("crust", 
+        ['Regular',
+        'Thin',
+        'Stuffed',
+        {name: "na", value: "N/A"}])#modify-item-crust
       fieldset#modify-item-toppings.make-things-vertical-please
         legend Item Toppings:
         - const TOPPINGS = ['Cheese', 'Pepperoni', 'Sausage', 'Peppers', 'Pineapple']
