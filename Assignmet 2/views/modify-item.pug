@@ -9,6 +9,9 @@ mixin addDropdown(name, items)
         - let itemLower = item.toLowerCase()
         option(value=itemLower) #{item}
 
+append head-content
+    script(src="scripts/modify-item.js" defer)
+
 block navigation-content
   a#order(href='order.html') ORDER
 
