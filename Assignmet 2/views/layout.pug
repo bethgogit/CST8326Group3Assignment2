@@ -2,9 +2,16 @@ doctype
 link(rel="stylesheet" href="style.css" type="text/css")
 header
     h1 Unknown Pizza Site
+nav
+    //This block is for adding links from the current page to other pages.
+    block navigation-content
 main
-    block page-name 
-        h2 Sample Page
+    //This block is for changing the current page's header. You only need to redefine pageName.
+    block page-name
+        - let pageName = "Sample Page"
+    h2 #{pageName}
+
+    //This block should contain the actual page content.
     block page-content 
         p Display your page content here!
 footer &copy;copyright
