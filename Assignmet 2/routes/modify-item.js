@@ -7,11 +7,22 @@ const Menu = require('../models/Menu');
 router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
 
-router.get("/modify/:id", async function (req, res) {
+router.get("/modify/:name", async function (req, res) {
    try {
-      const item = await Menu.findOne({ name: req.params.id});
+      console.log("loading item with name "+req.params.name)
+      const item = await Menu.findOne({ name: req.params.name});
       if (!item) return res.status(404).json({ success: false, message: 'Item not found' });
-      res.status(200).render("modify-item",item);
+      console.log(item);
+      //I don't understand why I can't pass the item directly.
+      res.status(200).render("modify-item",{
+            name: item.name,
+            description: item.description,
+            imagePredefined: item.imagePredefined,
+            imageUrl: item.imageUrl,
+            size: item.size,
+            crust: item.crust,
+            toppings: item.toppings,
+      });
    } catch (err) {
       res.status(500).json({ success: false, message: err.message });
    }
