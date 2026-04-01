@@ -38,7 +38,7 @@ block page-content
       fieldset#modify-item-info.make-things-vertical-please
         legend Item Info:
         label(for='modify-item-name') Item name:
-        input(name="name" value=name)#modify-item-name
+        input(name="name" value=name disabled=name)#modify-item-name
         +addError("invalid-name","Name must be between 0 and 64 characters.")
         label(for='modify-item-description') Item description:
         textarea(name="description")#modify-item-description #{description}
@@ -69,5 +69,5 @@ block page-content
           - let toppingLower = topping.toLowerCase()
           - let itemId = "modify-item-topping-"+toppingLower
           //I can use includes to check if a value exists in an array.
-          input(id=itemId type='checkbox' name="topping"+topping checked=toppings.includes(toppingLower))
+          input(id=itemId type='checkbox' name="topping"+topping checked=(toppings?toppings.includes(toppingLower):false))
           label(for=itemId) #{topping}
