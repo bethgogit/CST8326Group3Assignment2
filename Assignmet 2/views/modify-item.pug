@@ -21,8 +21,7 @@ block navigation-content
 block page-name
   - let pageName = "Add/Modify Item"
 
-block page-content 
-  // TODO: Define method (post likely) and action for form
+block page-content
   form(method="POST" action="/modify")#modify-item-form
     div
       fieldset#modify-item-image.make-things-vertical-please

@@ -7,21 +7,14 @@ const Menu = require('../models/Menu');
 router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
 
-router.get("/modify", function (req, res) {
-   //TODO: add parameter object containing item info
-   res.render("modify-item");
-});
-
 router.get("/modify/:id", async function (req, res) {
    try {
-      const item = await Menu.findById(req.params.id);
-      if (!user) return res.status(404).json({ success: false, message: 'Item not found' });
-      res.status(200).json({ success: true, data: item });
+      const item = await Menu.findOne({ name: req.params.id});
+      if (!item) return res.status(404).json({ success: false, message: 'Item not found' });
+      res.status(200).render("modify-item",item);
    } catch (err) {
       res.status(500).json({ success: false, message: err.message });
    }
-   //TODO: redirect to an appropriate page
-   res.redirect("/modify");
 });
 
 router.post("/modify", async function (req, res) {
