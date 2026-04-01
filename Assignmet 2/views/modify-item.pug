@@ -16,7 +16,8 @@ append head-content
     script(src="/scripts/modify-item.js" defer)
 
 block navigation-content
-  a#order(href='order.html') ORDER
+  a(href="/menu") MENU
+  a(href='/orders') ORDERS
 
 block page-name
   - let pageName = (name?"Modify":"Add")+" Item"
@@ -26,12 +27,19 @@ block page-content
     div
       fieldset#modify-item-image.make-things-vertical-please
         legend Item Image:
-        img(alt='image to display item as' src='')
+        - const imgSrc = imageUrl?imageUrl:"/img/"+imagePredefined+".png"
+        img(alt='image to display item as' src=imgSrc)
         label(for='modify-item-image-dropdown') Use predefined image:
         +addDropdown("modify-item-image-dropdown","imagePredefined", imagePredefined,
-        ["",
-        "image1",
-        "image2"])
+        [
+        "",
+        {name: "pizza", value: "Plain Pizza"},
+        {name: "pizzaMeat", value: "Meat Pizza"},
+        {name: "pizzaGreen", value: "Green Pizza"},
+        {name: "pizzaEvil", value: "Pineapple Pizza"},
+        {name: "pizzaMeatyGreen", value: "Meaty Green Pizza"},
+        {name: "breadsticks", value: "Breadsticks"},
+        {name: "slime", value: "Slime"}])
         label(for='modify-item-image-url') Use image URL:
         input(name="imageURL" value=imageUrl)#modify-item-image-url
         +addError("invalid-img","Please use a valid predefined image or valid image URL.")
@@ -45,8 +53,8 @@ block page-content
         +addError("invalid-desc","Description must be between 0 and 400 characters.")
       fieldset#modify-item-options
         input#save(type='submit' value='Save changes')
-        input#cancel(type='submit' value='Cancel changes')
-        input#delete(type='submit' value='Delete item')
+        input#cancel(type='submit' formmethod="GET" formaction="/cancelItem" value="Cancel changes" )
+        input#delete(type='submit' formaction="/deleteItem" value="Delete item" )
     div
       fieldset#modify-item-properties.make-things-vertical-please
         legend Item Properties:

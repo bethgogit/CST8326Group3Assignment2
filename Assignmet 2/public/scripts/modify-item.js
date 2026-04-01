@@ -30,7 +30,7 @@ let displayImage = document.querySelector("#modify-item-image>img");
 let imageError = document.getElementById("invalid-img");
 imageDropdown.addEventListener("change", (event) => {
     imageURL.value = "";
-    displayImage.setAttribute("src",imageDropdown.value);
+    displayImage.setAttribute("src","/img/"+imageDropdown.value+".png");
     imageError.hidden = validatePredefinedImage(imageDropdown.value);
 });
 imageURL.addEventListener("change", (event) => {
