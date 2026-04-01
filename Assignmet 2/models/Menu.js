@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Menu = mongoose.model("Menu", new mongoose.Schema({
+const menuSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -15,4 +15,6 @@ const Menu = mongoose.model("Menu", new mongoose.Schema({
     size: String,
     crust: String,
     toppings: [String]
-}));
+});
+
+module.exports = mongoose.model("Menu", menuSchema);
