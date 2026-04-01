@@ -12,7 +12,8 @@ function validateImageUrl(url) {
 }
 
 function validatePredefinedImage(option) {
-    return option != "";
+    console.log(option);
+    return option.length > 0;
 }
 
 function validateName(name) {
@@ -26,34 +27,36 @@ function validateDescription(desc) {
 let imageDropdown = document.getElementById("modify-item-image-dropdown");
 let imageURL = document.getElementById("modify-item-image-url");
 let displayImage = document.querySelector("#modify-item-image>img");
+let imageError = document.getElementById("invalid-img");
 imageDropdown.addEventListener("change", (event) => {
     imageURL.value = "";
     displayImage.setAttribute("src",imageDropdown.value);
+    imageError.hidden = validatePredefinedImage(imageDropdown.value);
 });
 imageURL.addEventListener("change", (event) => {
     imageDropdown.value = "";
     let isValid = validateImageUrl(imageURL.value);
     displayImage.setAttribute("src",isValid ? imageURL.value : "");
+    imageError.hidden = isValid;
+});
+
+let itemName = document.getElementById("modify-item-name");
+let itemNameError = document.getElementById("invalid-name");
+itemName.addEventListener("change", (event) => {
+    itemNameError.hidden = validateName(itemName.value);
+});
+
+let itemDesc = document.getElementById("modify-item-description");
+let itemDescError = document.getElementById("invalid-desc");
+itemDesc.addEventListener("input", (event) => {
+    itemDescError.hidden = validateDescription(itemDesc.value);
 });
 
 document.getElementById("save").addEventListener("click", (event) => {
-    let submissionValid = true;
-
-    let predefinedValid = validatePredefinedImage(imageDropdown.value);
-    let urlValid = validateImageUrl(imageURL.value);
-    if (!predefinedValid && !urlValid) {
-        submissionValid = false;
-    }
-
-    if (!validateName(document.getElementById("modify-item-name").value)) {
-        submissionValid = false;
-    }
-
-    if (!validateDescription(document.getElementById("modify-item-description").value)) {
-        submissionValid = false;
-    }
-
-    if (!submissionValid) {
+    imageError.hidden = validateImageUrl(imageURL.value) || validatePredefinedImage(imageDropdown.value);
+    itemNameError.hidden = validateName(itemName.value);
+    itemDescError.hidden = validateDescription(itemDesc.value);
+    if (!(imageError.hidden && itemNameError.hidden && itemDescError.hidden)) {
         event.preventDefault();
     }
 });
