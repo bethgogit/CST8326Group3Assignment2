@@ -19,7 +19,7 @@ block navigation-content
   a#order(href='order.html') ORDER
 
 block page-name
-  - let pageName = "Add/Modify Item"
+  - let pageName = (name?"Modify":"Add")+" Item"
 
 block page-content
   form(method="POST" action="/modify")#modify-item-form
