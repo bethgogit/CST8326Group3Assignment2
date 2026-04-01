@@ -12,6 +12,8 @@ app.set("view engine", "pug");
 //this line is required for including the router. You only need to change the require()'s specified path.
 app.use("/", require("./routes/index"));
 
+app.use("/", require("./routes/modify-item"));
+
 // Connect to MongoDB Atlas, then start the server
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
