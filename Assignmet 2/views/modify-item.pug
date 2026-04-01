@@ -13,7 +13,7 @@ mixin addError(id, description)
   p(id=id hidden).error #{description}
 
 append head-content
-    script(src="scripts/modify-item.js" defer)
+    script(src="/scripts/modify-item.js" defer)
 
 block navigation-content
   a#order(href='order.html') ORDER
