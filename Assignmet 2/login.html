@@ -4,33 +4,35 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Unknown Pizza</title>
+        <link href="style.css" rel="stylesheet">
+        <script src="loginAndSighUp.js" defer></script>
     </head>
     <body>
-        <nav>
-            <h1>Unknown Pizza</h1>
-        </nav>
+        
+        <h1>Unknown Pizza</h1>
         <main class="login">
-        <form action="process.php" method="post">
-            <fieldset id="email">
-                <label for="email"> Email</label>
-                <input
-                type="email"
-                id="email"
-                required
-                placeholder="Email Address"
-                >
-            </fieldset>
-            <fieldset id="pass">
-                <label for="pass"> Password</label>
-                <input
-                type="password"
-                id="pass"
-                required
-                >
-            </fieldset>
-            <input class="button" type="submit" value="LOGIN">
-			<input class="button" type="submit" formaction="signup.html" formnovalidate value="SIGN UP">
-        </form>
+            <form class="loginAndSignUp" action="process.php" method="post">
+                <fieldset id="email">
+                    <label id="lEma" for="ema"> Email</label>
+                    <input
+                    type="email"
+                    id="ema"
+                    required
+                    placeholder="Email Address"
+                    >
+                </fieldset>
+                <fieldset id="pass">
+                    <label class="lPass" for="passwd"> Password</label>
+                    <input
+                    type="password"
+                    id="passwd"
+                    required
+                    >
+					<div id="passError"></div>
+                </fieldset>
+                <input id="login" class="button" type="submit" value="LOGIN">
+                <a id="sign" class="button" href="signup.html">SIGN UP</a>
+            </form>
         </main>
         <footer>
             <p>&copy;known pizza</p>

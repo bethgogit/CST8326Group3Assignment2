@@ -11,7 +11,7 @@
             <h1>Unknown Pizza</h1>
         </nav>
         <main class="signUp">
-        <form action="process.php" method="post">
+        <form id="loginAndSignUp" action="process.php" method="post">
             <fieldset class="name">
                 <label for="firstName"> First Name</label>
                 <label for="lastName"> Last Name</label>
@@ -29,24 +29,25 @@
                 >
             </fieldset>
             <fieldset id="email">
-                <label for="email"> Email</label>
+                <label id="lEma" for="ema"> Email</label>
                 <input
-                type="email"
+                type="ema"
                 id="email"
                 required
                 placeholder="Email Address"
                 >
             </fieldset>
             <fieldset id="pass">
-                <label for="pass"> Password</label>
+                <label class="lpass" for="passwd"> Password</label>
                 <input
                 type="password"
-                id="pass"
+                id="passwd"
                 required
                 >
+				<div id="passError"></div>
             </fieldset>
             <fieldset id="pass2">
-                <label for="rePass"> Re-enter Password</label>
+                <label class="lPass" for="rePass"> Re-enter Password</label>
                 <input
                 type="password"
                 id="rePass"
@@ -54,7 +55,7 @@
                 >
             </fieldset>
             <input class="button" type="submit" value="SIGN UP">
-			<input class="button" type="submit" formaction="login.html" formnovalidate value="LOGIN">
+			<a id="sign" class="button" href="login.html">LOGIN</a>
         </form>
         </main>
         <footer>
