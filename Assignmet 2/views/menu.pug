@@ -10,4 +10,12 @@ block page-name
     - pageName = "Menu"
 
 block page-content
-    p This is an example of modifying a template!
+    each item in list
+        div 
+            - let imageSrc = item.imageUrl
+            if (item.imagePredefined.length > 0)
+                - imageSrc = `img/${item.imagePredefined}.png`
+            img(src=imageSrc alt="image of "+item.name).menu-image
+            div 
+                h3 #{item.name}
+                p #{item.description}
