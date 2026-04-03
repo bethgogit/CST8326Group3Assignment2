@@ -121,3 +121,9 @@ textarea {
     display: flex;
     flex-direction: row;
 }
+
+nav > a {
+    padding: 5px;
+    background-color: aquamarine;
+    margin: 5px;
+}
