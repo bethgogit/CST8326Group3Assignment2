@@ -1,15 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Unknown Pizza</title>
-    </head>
-    <body>
-        <main class="loginPage">
-            <a id="login" href="login.html">LOGIN</a>
-            <a id="signup" href="signup.html">SIGN UP</a>
-            <a id="order" href="order.html">ORDER</a>
-        </main>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unknown Pizza</title>
+</head>
+<body>
+    <nav>
+        <h1>Unknown Pizza</h1>
+    </nav>
+
+    <main class="orderPage">
+        <form action="/order" method="post">
+
+            <fieldset>
+                <label for="customerName">Name</label>
+                <input 
+                    type="text" 
+                    id="customerName"
+                    name="customerName"
+                    required 
+                    placeholder="Your Name">
+            </fieldset>
+
+            <fieldset>
+                <label for="pizzaSize">Pizza Size</label>
+                <select id="pizzaSize" name="pizzaSize" required>
+                    <option value="">Select Size</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <label for="toppings">Toppings</label>
+                <div class="toppings">
+                    <label><input type="checkbox" name="toppings" value="Pepperoni"> Pepperoni</label>
+                    <label><input type="checkbox" name="toppings" value="Mushrooms"> Mushrooms</label>
+                    <label><input type="checkbox" name="toppings" value="Onions"> Onions</label>
+                    <label><input type="checkbox" name="toppings" value="Bacon"> Bacon</label>
+                    <label><input type="checkbox" name="toppings" value="Extra Cheese"> Extra Cheese</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <label for="instructions">Special Instructions</label>
+                <textarea 
+                    id="instructions"
+                    name="instructions"
+                    placeholder="Anything else we should know?"
+                    rows="3"></textarea>
+            </fieldset>
+
+            <input class="button" type="reset" value="Clear">
+            <input class="button" type="submit" value="Place Order">
+
+        </form>
+    </main>
+</body>
 </html>

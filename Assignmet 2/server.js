@@ -11,6 +11,7 @@ app.set("view engine", "pug");
 
 //this line is required for including the router. You only need to change the require()'s specified path.
 app.use("/", require("./routes/index"));
+app.use("/", require("./routes/order"));
 
 // Connect to MongoDB Atlas, then start the server
 mongoose.connect(process.env.MONGO_URI)
@@ -24,3 +25,4 @@ mongoose.connect(process.env.MONGO_URI)
 }).catch((err) => {
     console.error("Couldn't connect to database:", err.message);
 });
+
