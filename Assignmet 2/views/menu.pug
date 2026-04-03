@@ -5,13 +5,14 @@ block navigation-content
     a(href='/orders') ORDERS
     a(href='/login') LOGIN
     a(href='/signup') SIGNUP
+    a(href='/newItem') ADD ITEM
 
 block page-name 
     - pageName = "Menu"
 
 block page-content
     each item in list
-        div 
+        div.menu-item-container.make-things-horizontal
             - let imageSrc = item.imageUrl
             if (item.imagePredefined.length > 0)
                 - imageSrc = `img/${item.imagePredefined}.png`
@@ -19,3 +20,10 @@ block page-content
             div 
                 h3 #{item.name}
                 p #{item.description}
+                p Size: #{item.size}
+                p Crust: #{item.crust}
+                h4 Toppings Included:
+                ul 
+                    each topping in item.toppings
+                        li #{topping}
+                a(href="/modify/"+item.name) Modify
