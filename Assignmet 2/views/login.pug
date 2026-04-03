@@ -1,0 +1,21 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Unknown Pizza
+  link(href='style.css' rel='stylesheet')
+  script(src='loginAndSighUp.js' defer='')
+h1 Unknown Pizza
+main.login
+  form.loginAndSignUp(action='process.php' method='post')
+    fieldset#email
+      label#lEma(for='ema')  Email
+      input#ema(type='email' required='' placeholder='Email Address')
+    fieldset#pass
+      label.lPass(for='passwd')  Password
+      input#passwd(type='password' required='')
+      #passError
+    input#login.button(type='submit' value='LOGIN')
+    a#sign.button(href='signup.html') SIGN UP
+footer
+  p &copy;known pizza

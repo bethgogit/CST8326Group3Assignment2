@@ -1,0 +1,29 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Unknown Pizza
+  link(href='public/style.css' rel='stylesheet')
+nav
+  h1 Unknown Pizza
+main.signUp
+  form#loginAndSignUp(action='process.php' method='post')
+    fieldset.name
+      label(for='firstName')  First Name
+      label(for='lastName')  Last Name
+      input#firstName(type='text' required='' placeholder='First Name')
+      input#lastName(type='text' required='' placeholder='Last Name')
+    fieldset#email
+      label#lEma(for='ema')  Email
+      input#email(type='ema' required='' placeholder='Email Address')
+    fieldset#pass
+      label.lpass(for='passwd')  Password
+      input#passwd(type='password' required='')
+      #passError
+    fieldset#pass2
+      label.lPass(for='rePass')  Re-enter Password
+      input#rePass(type='password' required='')
+    input.button(type='submit' value='SIGN UP')
+    a#sign.button(href='login.html') LOGIN
+footer
+  p &copy;known pizza
