@@ -75,16 +75,18 @@ document.getElementById("save").addEventListener("click", async (event) => {
     //I don't want the default form submission to occur in either case.
     event.preventDefault();
     if ((imageError.hidden && itemNameError.hidden && itemDescError.hidden)) {
-        let response = await fetch("/save",{
-            method: "POST",
+        let msg = document.getElementById("modify-item-result");
+        msg.textContent = "Talking to the server...";
+
+        let response = await fetch(itemName.disabled ?  "/modify" : "/save",{
+            method: itemName.disabled ? "PUT" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(getFormItemObject())
         });
 
-        let msg = document.getElementById("modify-item-result");
-
         if (response.ok) {
-            msg.textContent = "Item saved/updated successfully!";
+            let operation = itemName.disabled ? "updated" : "saved";
+            msg.textContent = `Item ${operation} successfully!`;
             itemName.disabled = true;
         } else {
             let result = await response.json();

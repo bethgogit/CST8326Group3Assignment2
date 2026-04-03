@@ -32,13 +32,14 @@ router.get("/modify/:name", async function (req, res) {
 
 router.post("/save", async function (req, res) {
    try {
+      console.log(req.body);
       const item = new Menu(req.body);
       if (await Menu.findOne({name: item.name})) {
          //Not sure if this is the right status code to use for an error due to a duplicate.
          //I found it here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409
          res.status(409).json({ success: false, message: "This name already exists in database." });
       } else {
-         item.save()
+         await item.save()
          res.status(200).json({ success: true, data: item})
       }
    } catch (err) {
@@ -48,10 +49,13 @@ router.post("/save", async function (req, res) {
 
 router.put("/modify", async function (req, res) {
    try {
-      const item = await Menu.findOne();
-      setFields(item,req);
-      item.save()
-      res.status(200).json({ success: true, data: item})
+      const item = await Menu.updateOne({name: req.body.name}, req.body);
+      console.log(item);
+      if (item) {
+         res.status(200).json({ success: true, data: item})
+      } else {
+         res.status(404).json({ success: false, message: "Cannot update an item that doesn't exist." });
+      }
    } catch (err) {
       res.status(500).json({ success: false, message: err.message });
    }
