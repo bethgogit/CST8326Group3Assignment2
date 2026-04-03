@@ -78,7 +78,7 @@ document.getElementById("save").addEventListener("click", async (event) => {
         let msg = document.getElementById("modify-item-result");
         msg.textContent = "Talking to the server...";
 
-        let response = await fetch(itemName.disabled ?  "/modify" : "/save",{
+        let response = await fetch("/save",{
             method: itemName.disabled ? "PUT" : "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(getFormItemObject())

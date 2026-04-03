@@ -46,7 +46,7 @@ router.post("/save", async function (req, res) {
    }
 });
 
-router.put("/modify", async function (req, res) {
+router.put("/save", async function (req, res) {
    try {
       const item = await Menu.updateOne({name: req.body.name}, req.body);
       console.log(item);
