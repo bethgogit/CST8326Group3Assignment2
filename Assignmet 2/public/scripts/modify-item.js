@@ -75,6 +75,13 @@ document.getElementById("save").addEventListener("click", async (event) => {
     //I don't want the default form submission to occur in either case.
     event.preventDefault();
     if ((imageError.hidden && itemNameError.hidden && itemDescError.hidden)) {
+        if (!itemName.disabled) {
+            if (!confirm("You are saving a new item. After it has been saved, "+
+                "you will not be able to change its name. Click OK if \""+itemName.value+
+                "\" is the name you want to use."
+            )) return;
+        }
+
         let msg = document.getElementById("modify-item-result");
         msg.textContent = "Talking to the server...";
 
