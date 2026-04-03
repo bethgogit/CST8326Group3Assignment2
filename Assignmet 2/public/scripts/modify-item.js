@@ -12,7 +12,6 @@ function validateImageUrl(url) {
 }
 
 function validatePredefinedImage(option) {
-    console.log(option);
     return option.length > 0;
 }
 
@@ -68,6 +67,28 @@ function getFormItemObject() {
     }
 }
 
+document.getElementById("delete").addEventListener("click", async (event) => {
+    event.preventDefault();
+    if (!confirm("Are you sure you want to delete "+
+        "\""+itemName.value+"\""
+        +"? This CANNOT be undone."
+            )) return;
+    let msg = document.getElementById("modify-item-result");
+        msg.textContent = "Talking to the server...";
+
+        let response= await fetch("/delete",{
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(getFormItemObject())});
+        if (response.ok) {
+            msg.textContent = `Item deleted successfully.`;
+            itemName.disabled = true;
+        } else {
+            let result = await response.json();
+            msg.textContent = "An error occurred! "+result.message;
+        }
+});
+
 document.getElementById("save").addEventListener("click", async (event) => {
     imageError.hidden = validateImageUrl(imageURL.value) || validatePredefinedImage(imageDropdown.value);
     itemNameError.hidden = validateName(itemName.value);
@@ -99,6 +120,5 @@ document.getElementById("save").addEventListener("click", async (event) => {
             let result = await response.json();
             msg.textContent = "An error occurred! "+result.message;
         }
-        console.log("response is "+response);
     }
 });
