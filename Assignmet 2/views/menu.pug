@@ -1,0 +1,65 @@
+extends layout.pug
+
+mixin addDropdown(id, name, items)
+  select(id=id name=name)
+    each item in items
+      if (item.name)
+        option(value=item.name) #{item.value}
+      else 
+        option(value=item) #{item}
+
+append head-content
+    title Menu
+
+block navigation-content
+    //TODO: These should change based on which user is logged in currently.
+    //LocalStorage could have been used to keep track of this. SessionStorage may be
+    //better since it sounds like it stores data for the session only, but I'm unsure if 
+    //we covered this in class.
+    a(href='/orders') ORDERS
+    a(href='/login') LOGIN
+    a(href='/signup') SIGNUP
+    a(href='/newItem') ADD ITEM
+
+block page-name 
+    - pageName = "Menu"
+
+block page-content
+    div.menu-item-container
+        h3 Search
+        form(method="GET" action="/menu").make-things-vertical-please
+            label(for="menu-item-name") Name (exact):
+            input(name="name",id="menu-item-name")
+            //This code could be improved by keeping options like these in a seperate
+            //file, then export lists to this page and the modify one.
+            label(for='modify-item-size') Size:
+            +addDropdown("modify-item-size","size",
+            ['All','Small','Medium','Large',"N/A"])
+            label(for='modify-item-crust') Crust:
+            +addDropdown("modify-item-crust","crust",
+            ['All','Regular','Thin','Stuffed',"N/A"])
+            fieldset
+                legend Toppings:
+                - const TOPPINGS = ['Nothing', 'Cheese', 'Pepperoni', 'Sausage', 'Peppers', 'Pineapple']
+                each topping in TOPPINGS
+                    - let toppingLower = topping.toLowerCase()
+                    - let itemId = "modify-item-topping-"+toppingLower
+                    input(id=itemId type='checkbox' name=topping)
+                    label(for=itemId) #{topping}
+            input(type="submit" value="Search")
+    each item in list
+        div.menu-item-container.make-things-horizontal
+            img(src=item.imgSrc alt="image of "+item.name).menu-image
+            div 
+                h3 #{item.name}
+                p #{item.description}
+                p Size: #{item.size}
+                p Crust: #{item.crust}
+                h4 Toppings Included:
+                if (item.toppings.length > 0)
+                    ul 
+                        each topping in item.toppings
+                            li #{topping}
+                else 
+                    p There are no toppings.
+                a(href="/modify/"+item.name) Modify

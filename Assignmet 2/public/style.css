@@ -13,12 +13,17 @@ body{
 h1{
     text-align: center;
 }
+
+/* 
+TODO: These should be classes or IDs.
+
 form{
     grid-column: 5 / 10;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, auto);
 }
+
 fieldset{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -26,6 +31,7 @@ fieldset{
     gap: 10px;
     border: 0;
 }
+*/
 
 .name{
     gap: 10px;
@@ -63,10 +69,61 @@ fieldset{
     grid-column: span 2;
     grid-row: 8;
 }
+
+/*TODO This is a bad class name.*/
 .button{
     grid-column: span 1;
     grid-row: 9;
     gap: 10px;
     width: 100%;
     background-color: aquamarine;
+}
+
+#modify-item-form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#modify-item-form>div>fieldset {
+    background-color: aquamarine;
+    margin: 5px;
+    padding: 5px;
+}
+
+.make-things-vertical-please {
+    display: flex;
+    flex-direction: column;
+}
+
+/*TODO: This may be a little too specific.*/
+.make-things-vertical-please > input,  
+.make-things-vertical-please > select {
+    width: 50%;
+}
+
+/*TODO: This affects all textareas, will need to create a class should 
+this pose an issue for other pages*/
+textarea {
+    resize: vertical;
+}
+
+.menu-item-container {
+    margin: 5px;
+    background-color: aquamarine;
+}
+
+.menu-item-container > img {
+    width: 25%;
+    padding: 5px;
+}
+
+.make-things-horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+nav > a {
+    padding: 5px;
+    background-color: aquamarine;
+    margin: 5px;
 }
