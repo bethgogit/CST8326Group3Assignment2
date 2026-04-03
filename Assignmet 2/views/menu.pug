@@ -1,5 +1,8 @@
 extends layout.pug
 
+append head-content
+    title Menu
+
 block navigation-content
     //TODO: These should change based on which user is logged in currently.
     a(href='/orders') ORDERS
