@@ -13,10 +13,8 @@ router.get("/newItem", async function(req, res) {
 
 router.get("/modify/:name", async function (req, res) {
    try {
-         console.log("loading item with name "+req.params.name)
          const item = await Menu.findOne({ name: req.params.name});
          if (!item) return res.status(404).json({ success: false, message: 'Item not found' });
-         console.log(item);
          //I don't understand why I can't pass the item directly.
          res.status(200).render("modify-item",{
                name: item.name,
@@ -32,38 +30,31 @@ router.get("/modify/:name", async function (req, res) {
       }
 });
 
-function setFields(item, req) {
-   item.name = req.body.name;
-   item.description = req.body.description;
-   item.imagePredefined = req.body.imagePredefined;
-   item.imageUrl = req.body.imageURL;
-   item.size = req.body.size;
-   item.crust = req.body.crust;
-
-   const TOPPING_KEYWORD = "topping";
-   var toppings = [];
-   for (key in req.body) {
-      if (key.substring(0,TOPPING_KEYWORD.length) === TOPPING_KEYWORD) {
-         toppings.push(key.substring(TOPPING_KEYWORD.length).toLowerCase());
-      }
-   }
-   item.toppings =  toppings
-}
-
-router.post("/modify", async function (req, res) {
+router.post("/save", async function (req, res) {
    try {
-      const item = new Menu()
-      setFields(item,req);
-      item.save()
-      res.status(200);
+      const item = new Menu(req.body);
+      if (await Menu.findOne({name: item.name})) {
+         //Not sure if this is the right status code to use for an error due to a duplicate.
+         //I found it here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409
+         res.status(409).json({ success: false, message: "This name already exists in database." });
+      } else {
+         item.save()
+         res.status(200).json({ success: true, data: item})
+      }
    } catch (err) {
       res.status(500).json({ success: false, message: err.message });
    }
-   res.redirect("/menu");
 });
 
 router.put("/modify", async function (req, res) {
- 
+   try {
+      const item = await Menu.findOne();
+      setFields(item,req);
+      item.save()
+      res.status(200).json({ success: true, data: item})
+   } catch (err) {
+      res.status(500).json({ success: false, message: err.message });
+   }
 });
 
 module.exports = router

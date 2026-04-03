@@ -52,11 +52,44 @@ itemDesc.addEventListener("input", (event) => {
     itemDescError.hidden = validateDescription(itemDesc.value);
 });
 
-document.getElementById("save").addEventListener("click", (event) => {
+function getFormItemObject() {
+    let toppings = [];
+    for (item of document.querySelectorAll("#modify-item-toppings>input")) {
+        if (item.checked) toppings.push(item.name);
+    }
+    let imgSrc = validatePredefinedImage(imageDropdown.value) ? "/img/"+imageDropdown.value+".png" : imageURL.value;
+    return {
+        imgSrc: imgSrc,
+        name: itemName.value,
+        description: itemDesc.value,
+        size: document.getElementById("modify-item-size").value,
+        crust: document.getElementById("modify-item-crust").value,
+        toppings: toppings
+    }
+}
+
+document.getElementById("save").addEventListener("click", async (event) => {
     imageError.hidden = validateImageUrl(imageURL.value) || validatePredefinedImage(imageDropdown.value);
     itemNameError.hidden = validateName(itemName.value);
     itemDescError.hidden = validateDescription(itemDesc.value);
-    if (!(imageError.hidden && itemNameError.hidden && itemDescError.hidden)) {
-        event.preventDefault();
+    //I don't want the default form submission to occur in either case.
+    event.preventDefault();
+    if ((imageError.hidden && itemNameError.hidden && itemDescError.hidden)) {
+        let response = await fetch("/save",{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(getFormItemObject())
+        });
+
+        let msg = document.getElementById("modify-item-result");
+
+        if (response.ok) {
+            msg.textContent = "Item saved/updated successfully!";
+            itemName.disabled = true;
+        } else {
+            let result = await response.json();
+            msg.textContent = "An error occurred! "+result.message;
+        }
+        console.log("response is "+response);
     }
 });
