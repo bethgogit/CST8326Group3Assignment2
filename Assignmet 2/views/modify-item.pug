@@ -6,14 +6,14 @@ mixin addDropdown(id, name, selected, items)
       if (item.name)
         option(value=item.name selected=(item.name === selected)) #{item.value}
       else 
-        - let itemLower = item.toLowerCase()
-        option(value=itemLower selected=(itemLower === selected)) #{item}
+        option(value=item selected=(item === selected)) #{item}
 
 mixin addError(id, description)
   p(id=id hidden).error #{description}
 
 append head-content
     script(src="/scripts/modify-item.js" defer)
+    title Modify #{name}
 
 block navigation-content
   a(href="/menu") MENU
@@ -23,14 +23,15 @@ block page-name
   - let pageName = (name?"Modify":"Add")+" Item"
 
 block page-content
-  form(method="POST" action="/modify")#modify-item-form
+  p#modify-item-result
+  form#modify-item-form
     div
       fieldset#modify-item-image.make-things-vertical-please
         legend Item Image:
-        - const imgSrc = imageUrl?imageUrl:"/img/"+imagePredefined+".png"
+        - const imgPredefined = imgSrc && imgSrc.match(/\/img\/.*\.png/);
         img(alt='image to display item as' src=imgSrc)
         label(for='modify-item-image-dropdown') Use predefined image:
-        +addDropdown("modify-item-image-dropdown","imagePredefined", imagePredefined,
+        +addDropdown("modify-item-image-dropdown","imagePredefined", (imgPredefined?imgSrc.substring(5,imgSrc.length-4):""),
         [
         "",
         {name: "pizza", value: "Plain Pizza"},
@@ -41,7 +42,7 @@ block page-content
         {name: "breadsticks", value: "Breadsticks"},
         {name: "slime", value: "Slime"}])
         label(for='modify-item-image-url') Use image URL:
-        input(name="imageURL" value=imageUrl)#modify-item-image-url
+        input(name="imageURL" value=(imgPredefined?"":imgSrc))#modify-item-image-url
         +addError("invalid-img","Please use a valid predefined image or valid image URL.")
       fieldset#modify-item-info.make-things-vertical-please
         legend Item Info:
@@ -52,24 +53,17 @@ block page-content
         textarea(name="description")#modify-item-description #{description}
         +addError("invalid-desc","Description must be between 0 and 400 characters.")
       fieldset#modify-item-options
-        input#save(type='submit' value='Save changes')
-        input#cancel(type='submit' formmethod="GET" formaction="/cancelItem" value="Cancel changes" )
-        input#delete(type='submit' formaction="/deleteItem" value="Delete item" )
+        button#save() Save changes
+        button#delete() Delete item
     div
       fieldset#modify-item-properties.make-things-vertical-please
         legend Item Properties:
         label(for='modify-item-size') Item size:
         +addDropdown("modify-item-size","size", size,
-        ['Small',
-        'Medium',
-        'Large',
-        {name: "na", value: "N/A"}])
+        ['Small','Medium','Large',"N/A"])
         label(for='modify-item-crust') Item crust:
         +addDropdown("modify-item-crust","crust", crust,
-        ['Regular',
-        'Thin',
-        'Stuffed',
-        {name: "na", value: "N/A"}])
+        ['Regular','Thin','Stuffed',"N/A"])
       fieldset#modify-item-toppings.make-things-vertical-please
         legend Item Toppings:
         - const TOPPINGS = ['Cheese', 'Pepperoni', 'Sausage', 'Peppers', 'Pineapple']
@@ -77,5 +71,5 @@ block page-content
           - let toppingLower = topping.toLowerCase()
           - let itemId = "modify-item-topping-"+toppingLower
           //I can use includes to check if a value exists in an array.
-          input(id=itemId type='checkbox' name="topping"+topping checked=(toppings?toppings.includes(toppingLower):false))
+          input(id=itemId type='checkbox' name=topping checked=(toppings?toppings.includes(topping):false))
           label(for=itemId) #{topping}

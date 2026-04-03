@@ -12,7 +12,6 @@ function validateImageUrl(url) {
 }
 
 function validatePredefinedImage(option) {
-    console.log(option);
     return option.length > 0;
 }
 
@@ -52,11 +51,74 @@ itemDesc.addEventListener("input", (event) => {
     itemDescError.hidden = validateDescription(itemDesc.value);
 });
 
-document.getElementById("save").addEventListener("click", (event) => {
+function getFormItemObject() {
+    let toppings = [];
+    for (item of document.querySelectorAll("#modify-item-toppings>input")) {
+        if (item.checked) toppings.push(item.name);
+    }
+    let imgSrc = validatePredefinedImage(imageDropdown.value) ? "/img/"+imageDropdown.value+".png" : imageURL.value;
+    return {
+        imgSrc: imgSrc,
+        name: itemName.value,
+        description: itemDesc.value,
+        size: document.getElementById("modify-item-size").value,
+        crust: document.getElementById("modify-item-crust").value,
+        toppings: toppings
+    }
+}
+
+document.getElementById("delete").addEventListener("click", async (event) => {
+    event.preventDefault();
+    if (!confirm("Are you sure you want to delete "+
+        "\""+itemName.value+"\""
+        +"? This CANNOT be undone."
+            )) return;
+    let msg = document.getElementById("modify-item-result");
+        msg.textContent = "Talking to the server...";
+
+        let response= await fetch("/delete",{
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(getFormItemObject())});
+        if (response.ok) {
+            msg.textContent = `Item deleted successfully.`;
+            itemName.disabled = true;
+        } else {
+            let result = await response.json();
+            msg.textContent = "An error occurred! "+result.message;
+        }
+});
+
+document.getElementById("save").addEventListener("click", async (event) => {
     imageError.hidden = validateImageUrl(imageURL.value) || validatePredefinedImage(imageDropdown.value);
     itemNameError.hidden = validateName(itemName.value);
     itemDescError.hidden = validateDescription(itemDesc.value);
-    if (!(imageError.hidden && itemNameError.hidden && itemDescError.hidden)) {
-        event.preventDefault();
+    //I don't want the default form submission to occur in either case.
+    event.preventDefault();
+    if ((imageError.hidden && itemNameError.hidden && itemDescError.hidden)) {
+        if (!itemName.disabled) {
+            if (!confirm("You are saving a new item. After it has been saved, "+
+                "you will not be able to change its name. Click OK if \""+itemName.value+
+                "\" is the name you want to use."
+            )) return;
+        }
+
+        let msg = document.getElementById("modify-item-result");
+        msg.textContent = "Talking to the server...";
+
+        let response = await fetch("/save",{
+            method: itemName.disabled ? "PUT" : "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(getFormItemObject())
+        });
+
+        if (response.ok) {
+            let operation = itemName.disabled ? "updated" : "saved";
+            msg.textContent = `Item ${operation} successfully!`;
+            itemName.disabled = true;
+        } else {
+            let result = await response.json();
+            msg.textContent = "An error occurred! "+result.message;
+        }
     }
 });

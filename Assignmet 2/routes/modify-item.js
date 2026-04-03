@@ -13,56 +13,64 @@ router.get("/newItem", async function(req, res) {
 
 router.get("/modify/:name", async function (req, res) {
    try {
-         console.log("loading item with name "+req.params.name)
          const item = await Menu.findOne({ name: req.params.name});
          if (!item) return res.status(404).json({ success: false, message: 'Item not found' });
-         console.log(item);
-         //I don't understand why I can't pass the item directly.
+         //I don't know why but I can't pass the item directly. Using .exec() doesn't seem to fix anything.
          res.status(200).render("modify-item",{
-               name: item.name,
-               description: item.description,
-               imagePredefined: item.imagePredefined,
-               imageUrl: item.imageUrl,
-               size: item.size,
-               crust: item.crust,
-               toppings: item.toppings,
+            name: item.name,
+            description: item.description,
+            imgSrc: item.imgSrc,
+            size: item.size,
+            crust: item.crust,
+            toppings: item.toppings
          });
       } catch (err) {
          res.status(500).json({ success: false, message: err.message });
       }
 });
 
-function setFields(item, req) {
-   item.name = req.body.name;
-   item.description = req.body.description;
-   item.imagePredefined = req.body.imagePredefined;
-   item.imageUrl = req.body.imageURL;
-   item.size = req.body.size;
-   item.crust = req.body.crust;
-
-   const TOPPING_KEYWORD = "topping";
-   var toppings = [];
-   for (key in req.body) {
-      if (key.substring(0,TOPPING_KEYWORD.length) === TOPPING_KEYWORD) {
-         toppings.push(key.substring(TOPPING_KEYWORD.length).toLowerCase());
-      }
-   }
-   item.toppings =  toppings
-}
-
-router.post("/modify", async function (req, res) {
+router.post("/save", async function (req, res) {
    try {
-      var item = await Menu.findOne({ name: req.params.name});
-      if (item === null) item = new Menu()
-      console.log(item);
-      setFields(item,req);
-      item.save()
-      //TODO: should probably redirect instead
-      res.status(200).render("modify-item");
+      const item = new Menu(req.body);
+      if (await Menu.findOne({name: item.name})) {
+         //Not sure if this is the right status code to use for an error due to a duplicate.
+         //I found it here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409
+         res.status(409).json({ success: false, message: "This name already exists in database." });
+      } else {
+         await item.save()
+         res.status(200).json({ success: true, data: item})
+      }
    } catch (err) {
       res.status(500).json({ success: false, message: err.message });
    }
 });
 
+router.put("/save", async function (req, res) {
+   try {
+      const item = await Menu.updateOne({name: req.body.name}, req.body);
+      if (item) {
+         res.status(200).json({ success: true, data: item})
+      } else {
+         res.status(404).json({ success: false, message: "Cannot update an item that doesn't exist." });
+      }
+   } catch (err) {
+      res.status(500).json({ success: false, message: err.message });
+   }
+});
+
+router.delete("/delete", async function (req, res) {
+   try {
+      const result = await Menu.deleteOne({name: req.body.name});
+      console.log("Docs deleted: " + 
+   result.deletedCount);
+      if (result.deletedCount == 1) {
+         res.status(204).json({});
+      } else {
+         res.status(404).json({ success: false, message: "Cannot delete an item that doesn't exist." });
+      }
+   } catch (err) {
+      res.status(500).json({ success: false, message: err.message });
+   }
+});
 
 module.exports = router
