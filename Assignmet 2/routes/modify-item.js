@@ -52,17 +52,18 @@ function setFields(item, req) {
 
 router.post("/modify", async function (req, res) {
    try {
-      var item = await Menu.findOne({ name: req.params.name});
-      if (item === null) item = new Menu()
-      console.log(item);
+      const item = new Menu()
       setFields(item,req);
       item.save()
-      //TODO: should probably redirect instead
-      res.status(200).render("modify-item");
+      res.status(200);
    } catch (err) {
       res.status(500).json({ success: false, message: err.message });
    }
+   res.redirect("/menu");
 });
 
+router.put("/modify", async function (req, res) {
+ 
+});
 
 module.exports = router
