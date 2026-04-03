@@ -10,7 +10,10 @@ const menuSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imageSrc: String,
+    imgSrc: {
+        type: String,
+        required: true
+    },
     size: String,
     crust: String,
     toppings: [String]

@@ -15,15 +15,14 @@ router.get("/modify/:name", async function (req, res) {
    try {
          const item = await Menu.findOne({ name: req.params.name});
          if (!item) return res.status(404).json({ success: false, message: 'Item not found' });
-         //I don't understand why I can't pass the item directly.
+         //I don't know why but I can't pass the item directly. Using .exec() doesn't seem to fix anything.
          res.status(200).render("modify-item",{
-               name: item.name,
-               description: item.description,
-               imagePredefined: item.imagePredefined,
-               imageUrl: item.imageUrl,
-               size: item.size,
-               crust: item.crust,
-               toppings: item.toppings,
+            name: item.name,
+            description: item.description,
+            imgSrc: item.imgSrc,
+            size: item.size,
+            crust: item.crust,
+            toppings: item.toppings
          });
       } catch (err) {
          res.status(500).json({ success: false, message: err.message });
@@ -32,8 +31,8 @@ router.get("/modify/:name", async function (req, res) {
 
 router.post("/save", async function (req, res) {
    try {
-      console.log(req.body);
       const item = new Menu(req.body);
+      console.log(item);
       if (await Menu.findOne({name: item.name})) {
          //Not sure if this is the right status code to use for an error due to a duplicate.
          //I found it here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409

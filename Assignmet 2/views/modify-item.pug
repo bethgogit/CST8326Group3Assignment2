@@ -13,6 +13,7 @@ mixin addError(id, description)
 
 append head-content
     script(src="/scripts/modify-item.js" defer)
+    title Modify #{name}
 
 block navigation-content
   a(href="/menu") MENU
@@ -27,10 +28,10 @@ block page-content
     div
       fieldset#modify-item-image.make-things-vertical-please
         legend Item Image:
-        - const imgSrc = imageUrl?imageUrl:"/img/"+imagePredefined+".png"
+        - const imgPredefined = imgSrc && imgSrc.match(/\/img\/.*\.png/);
         img(alt='image to display item as' src=imgSrc)
         label(for='modify-item-image-dropdown') Use predefined image:
-        +addDropdown("modify-item-image-dropdown","imagePredefined", imagePredefined,
+        +addDropdown("modify-item-image-dropdown","imagePredefined", (imgPredefined?imgSrc.substring(5,imgSrc.length-4):""),
         [
         "",
         {name: "pizza", value: "Plain Pizza"},
@@ -41,7 +42,7 @@ block page-content
         {name: "breadsticks", value: "Breadsticks"},
         {name: "slime", value: "Slime"}])
         label(for='modify-item-image-url') Use image URL:
-        input(name="imageURL" value=imageUrl)#modify-item-image-url
+        input(name="imageURL" value=(imgPredefined?"":imgSrc))#modify-item-image-url
         +addError("invalid-img","Please use a valid predefined image or valid image URL.")
       fieldset#modify-item-info.make-things-vertical-please
         legend Item Info:
