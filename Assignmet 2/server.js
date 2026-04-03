@@ -13,6 +13,7 @@ app.set("view engine", "pug");
 app.use("/", require("./routes/index"));
 
 app.use("/", require("./routes/modify-item"));
+app.use("/", require("./routes/menu"));
 
 // Connect to MongoDB Atlas, then start the server
 mongoose.connect(process.env.MONGO_URI)

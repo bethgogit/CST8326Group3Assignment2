@@ -1,0 +1,13 @@
+extends layout.pug
+
+block navigation-content
+    //TODO: These should change based on which user is logged in currently.
+    a(href='/orders') ORDERS
+    a(href='/login') LOGIN
+    a(href='/signup') SIGNUP
+
+block page-name 
+    - pageName = "Menu"
+
+block page-content
+    p This is an example of modifying a template!
