@@ -11,7 +11,7 @@ router.get("/menu", async function (req, res) {
     var items;
     try {
         let query = {};
-        if (req.query.name.length>0) query.name = req.query.name
+        if (req.query.name && req.query.name.length>0) query.name = req.query.name
         if (req.query.size && req.query.size!="All") query.size = req.query.size
         if (req.query.crust && req.query.crust!="All") query.crust = req.query.crust
         let findToppings = []
