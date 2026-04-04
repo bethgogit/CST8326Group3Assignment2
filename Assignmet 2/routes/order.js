@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db"); 
+//We did not use SQL for this course and the dependency doesn't exist so I'm removing it.
+//const db = require("../db"); 
 
 
 router.get("/order", (req, res) => {
